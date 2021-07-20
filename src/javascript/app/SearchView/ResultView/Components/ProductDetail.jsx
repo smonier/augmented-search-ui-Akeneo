@@ -11,29 +11,14 @@ import {
     CardContent,
     Typography, Grid, Button, Link
 } from '@material-ui/core';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import LocalOfferTwoToneIcon from '@material-ui/icons/LocalOfferTwoTone';
-import TextField from '@material-ui/core/TextField';
-import {addProduct} from '../misc/utils';
 
 const Product = props => {
     const uuid = props.uuid;
     const url = props.url;
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const [quantity, setQuantity] = React.useState('');
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     const variables = Object.assign(gqlConfig.gqlConfig, {uuid: uuid});
     const {loading, error, data} = useQuery(GET_PRODUCT, {
@@ -125,60 +110,22 @@ const Product = props => {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={3}>
-                                    <Button id={product.title} variant="outlined" color="primary" onClick={handleOpen}>Select
-                                    </Button>
-                                    <Modal
-                                        closeAfterTransition
-                                        aria-labelledby="transition-modal-title"
-                                        aria-describedby="transition-modal-description"
-                                        className={classes.modal}
-                                        open={open}
-                                        BackdropComponent={Backdrop}
-                                        BackdropProps={{
-                                            timeout: 500
-                                        }}
-                                        onClose={handleClose}
+
+                                    <Button id={product.title}
+                                            variant="outlined"
+                                            color="primary"
+                                            onClick={() => {
+                                                const productToAdd = {
+                                                    uuid: product.uuid,
+                                                    pimid: product.title,
+                                                    qty: 1
+                                                };
+                                                window._jsc_.addToCart(productToAdd);
+                                            }}
                                     >
-                                        <Fade in={open}>
-                                            <div className={classes.paper}>
-                                                <Grid container spacing={3} justify="flex-end">
-                                                    <Grid item xs={12}>
+                                        Add to Cart
+                                    </Button>
 
-                                                        <h2 id="transition-modal-title">{product.name}</h2>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <h4>{product.title}</h4>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <TextField id="quantity"
-                                                                   label="Quantity"
-                                                                   type="number"
-                                                                   value={quantity}
-                                                                   defaultValue={1}
-                                                                   InputLabelProps={{
-                                                                       shrink: true
-                                                                   }}
-                                                                   onChange={event => {
-                                                                       setQuantity(event.target.value);
-                                                                   }}/>
-                                                    </Grid>
-                                                    <Grid item xs={12} justify="flex-end">
-
-                                                        <Button id={product.title}
-                                                                className={classes.titleItemRight}
-                                                                variant="outlined"
-                                                                color="primary"
-                                                                onClick={() => {
-                                                                    addProduct(product.title, quantity ? quantity : 1);
-                                                                    handleClose();
-                                                                }}
-                                                        >Add to Cart
-                                                        </Button>
-                                                    </Grid>
-                                                </Grid>
-                                            </div>
-                                        </Fade>
-                                    </Modal>
                                 </Grid>
                             </Grid>
                         </div>
