@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import * as _ from 'lodash';
 import moment from 'moment';
 import ProductDetail from './Components/ProductDetail';
+import NewsImg from './Components/NewsImg';
+
 import {Grid} from '@material-ui/core';
 
 function getFieldType(result, field, type) {
@@ -130,6 +132,8 @@ Product.propTypes = {
     product: PropTypes.object.isRequired
 };
 const News = ({news, key}) => {
+    const uuid = getRaw(news, 'id');
+
     return (
         <div key={key}
              className="sui-result px-5"
@@ -142,7 +146,7 @@ const News = ({news, key}) => {
                 justifyContent: 'space-evenly'
             }}
             >
-                <img src={getRaw(news, 'image')} style={{maxHeight: '150px'}}/>
+                <NewsImg uuid={uuid}/>
                 <div style={{maxWidth: '500px', minWidth: '500px'}}>
                     <a href={getRaw(news, 'link').replace('localhost', 'localhost:8080')}><h2
                         dangerouslySetInnerHTML={{__html: getEscapedField(news, 'title')}}/>

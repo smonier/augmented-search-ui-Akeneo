@@ -5,7 +5,7 @@ const gqlConfig = {
 };
 
 const gqlEndpoint = {
-    url: 'http://localhost:8080/modules/graphql'
+    url: '/modules/graphql'
 };
 export default {
     gqlConfig,

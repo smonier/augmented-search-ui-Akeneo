@@ -22,8 +22,7 @@ let fields = [
     new Field(FieldType.NODE, 'vote_count'),
     new Field(FieldType.NODE, 'popularity'),
     new Field(FieldType.NODE, 'image'),
-    new Field(FieldType.NODE, 'description'),
-    new Field(FieldType.NODE, 'name'),
+    new Field(FieldType.NODE, 'jgql:id'),
     new Field(FieldType.NODE, 'overview')
 ];
 

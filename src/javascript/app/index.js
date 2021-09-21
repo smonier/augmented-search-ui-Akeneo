@@ -10,7 +10,7 @@ import {
 import {BrowserRouter as Router} from 'react-router-dom';
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:8080/modules/graphql'
+    uri: '/modules/graphql'
 });
 
 // 3
