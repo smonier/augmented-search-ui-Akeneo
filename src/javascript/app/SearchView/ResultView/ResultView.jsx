@@ -138,26 +138,23 @@ const News = ({news, key}) => {
         <div key={key}
              className="sui-result px-5"
         >
-            <div style={{
-                minHeight: '300px',
-                maxHeight: '300px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-evenly'
-            }}
-            >
+
+            <div className="card" style={{width: '100%', flexDirection: 'row'}}>
                 <NewsImg uuid={uuid}/>
-                <div style={{maxWidth: '500px', minWidth: '500px'}}>
-                    <a href={getRaw(news, 'link').replace('localhost', 'localhost:8080')}><h2
-                        dangerouslySetInnerHTML={{__html: getEscapedField(news, 'title')}}/>
-                    </a>
-                    <p
-                        dangerouslySetInnerHTML={{__html: getEscapedField(news, 'excerpt')}}
-                        style={{fontSize: 'smaller', maxHeight: '200px'}}/>
+                <div className="card-body">
+                    <h5 className="card-title" dangerouslySetInnerHTML={{__html: getEscapedField(news, 'title')}}/>
+                    <p className="card-text"
+                       dangerouslySetInnerHTML={{__html: getEscapedField(news, 'excerpt')}}
+                       style={{fontSize: 'smaller', maxHeight: '200px'}}/>
+                    <a href={getRaw(news, 'link').replace('localhost', 'localhost:8080')} className="btn btn-primary">Read more</a>
                 </div>
+
             </div>
-            <div><DateComponent result={news}/></div>
+            <div className="card-footer text-muted">
+                <DateComponent result={news}/>
+            </div>
         </div>
+
     );
 };
 

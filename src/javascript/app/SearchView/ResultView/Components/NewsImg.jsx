@@ -33,7 +33,7 @@ const NewsImg = ({uuid}) => {
     const uri = '/files/live' + (img.image);
 
     return (
-        <img src={uri} style={{maxHeight: '150px', maxWidth: '150px'}}/>
+        <img src={uri} style={{width: '30%', objectFit: 'cover'}} className="card-img-top"/>
     );
 };
 
